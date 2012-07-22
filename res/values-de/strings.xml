@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="enable">Einschalten</string>
+    <string name="service_running">Service läuft</string>
+    <string name="service_not_running">Service läuft nicht</string>
+    <string name="service_running_summary">Hier klicken um den Service zu stoppen</string>
+    <string name="service_not_running_summary">Hier klicken um den Service zu starten</string>
+    <string name="autoanswer">Autom. Abheben</string>
+    <string name="autoanswer_summary">Abheben bei geöffneter Tastatur</string>
+    <string name="autohangup">Autom. Auflegen</string>
+    <string name="autohangup_summary">Auflegen bei geschlossener Tastatur</string>
+    <string name="no_hardwarekeyboard_titel">Hardware-Keyboard nicht gefunden!</string>
+    <string name="no_hardwarekeyboard_msg">Konnte kein Hardware-Keyboard finden, diese App funktioniert nicht auf diesem Gerät</string>
+
+</resources>

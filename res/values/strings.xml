@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="full_v">true</string>
+    <string name="app_name">SlideItLoud</string>
+    <string name="enable">Enable</string>
+    <string name="service_running">Service is running</string>
+    <string name="service_not_running">Service is not running</string>
+    <string name="service_running_summary">Click here to stop service</string>
+    <string name="service_not_running_summary">Click here to start service</string>
+    <string name="autoanswer">Auto Answer</string>
+    <string name="autoanswer_summary">Answer call on open keyboard</string>
+    <string name="autohangup">Auto Hangup</string>
+    <string name="autohangup_summary">Hangup call on closed keyboard</string>
+    <string name="no_hardwarekeyboard_titel">Hardware-Keyboard not found!</string>
+    <string name="no_hardwarekeyboard_msg">Couldn\'t find a hardwarekeyboard, this app makes no sense for your device</string>
+
+</resources>
