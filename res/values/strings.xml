@@ -15,7 +15,6 @@
 -->
 <resources>
 
-    <string name="full_v">true</string>
     <string name="app_name">SlideItLoud</string>
     <string name="enable">Enable</string>
     <string name="service_running">Service is running</string>
