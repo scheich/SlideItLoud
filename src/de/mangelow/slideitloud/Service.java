@@ -38,7 +38,7 @@ public class Service extends android.app.Service {
 
 	@Override
 	public IBinder onBind(Intent arg0) {
-		if(D)Log.d(TAG, "onBind()");
+		//if(D)Log.d(TAG, "onBind()");
 
 		return null;
 	}	
@@ -54,42 +54,42 @@ public class Service extends android.app.Service {
 		this.unregisterReceiver(mBroadcastReceiver);
 		if(D)Log.d(TAG, "Service stopped");
 	}
-	private void answerPhoneHeadsethook(Context context) {
-		if(D)Log.d(TAG, "answerPhoneHeadsethook()");
+	private void answerCallWithHeadsethook(Context context) {
+		if(D)Log.d(TAG, "answerCallWithHeadsethook()");
 
 		// Simulate a press of the headset button to pick up the call
-		Intent buttonDown = new Intent(Intent.ACTION_MEDIA_BUTTON);             
-		buttonDown.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_HEADSETHOOK));
-		context.sendOrderedBroadcast(buttonDown, "android.permission.CALL_PRIVILEGED");
+		//Intent buttonDown = new Intent(Intent.ACTION_MEDIA_BUTTON);             
+		//buttonDown.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_HEADSETHOOK));
+		//context.sendOrderedBroadcast(buttonDown, "android.permission.CALL_PRIVILEGED");
 
 		// froyo and beyond trigger on buttonUp instead of buttonDown
 		Intent buttonUp = new Intent(Intent.ACTION_MEDIA_BUTTON);               
 		buttonUp.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_HEADSETHOOK));
 		context.sendOrderedBroadcast(buttonUp, "android.permission.CALL_PRIVILEGED");
 	}	
-	private void hangUpOverAirplaneMode(Context context) {
-		if(D)Log.d(TAG, "hangUpOverAirplaneMode()");
+	private void hangUpWithAirPlanceMode(Context context) {
+		if(D)Log.d(TAG, "hangUpWithAirPlanceMode()");
 
+		// Enable Airplane Mode
 		Settings.System.putInt(
 				getContentResolver(),
 				Settings.System.AIRPLANE_MODE_ON, 1);
 
-		// Post an intent to reload
 		Intent intent = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
 		intent.putExtra("state", 1);
 		context.sendBroadcast(intent);
-
+		
+		// Sleep one second
 		try {
 			Thread.sleep(1000);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 
+		// Disable Airplane Mode
 		Settings.System.putInt(
 				getContentResolver(),
 				Settings.System.AIRPLANE_MODE_ON, 0);
-
-		// Post an intent to reload
 		intent = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
 		intent.putExtra("state", 0);
 		context.sendBroadcast(intent);
@@ -124,7 +124,7 @@ public class Service extends android.app.Service {
 					boolean autohangup = mHelper.loadBooleanPref(context, "autohangup", mHelper.AUTOHANGUP);
 					if(autohangup) {
 						if(D)Log.d(TAG, "AutoHangup");
-						hangUpOverAirplaneMode(context);
+						hangUpWithAirPlanceMode(context);
 						return;
 					}	
 				}
@@ -135,7 +135,7 @@ public class Service extends android.app.Service {
 					boolean autoanswer = mHelper.loadBooleanPref(context, "autoanswer", mHelper.AUTOANSWER);
 					if(state==1&&autoanswer) {
 						if(D)Log.d(TAG, "AutoAnswer");
-						answerPhoneHeadsethook(context);
+						answerCallWithHeadsethook(context);
 					}
 				}
 			}
