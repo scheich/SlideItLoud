@@ -24,8 +24,6 @@
         android:targetSdkVersion="16" >
     </uses-sdk>
 
-    <uses-configuration android:reqHardKeyboard="true" />
-
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
