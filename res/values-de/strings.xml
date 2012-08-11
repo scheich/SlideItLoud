@@ -15,6 +15,7 @@
 -->
 <resources>
 
+    <string name="app_name">SlideItLoud</string>
     <string name="enable">Einschalten</string>
     <string name="service_running">Service läuft</string>
     <string name="service_not_running">Service läuft nicht</string>
