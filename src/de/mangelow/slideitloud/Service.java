@@ -61,7 +61,7 @@ public class Service extends android.app.Service {
 		buttonUp.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_HEADSETHOOK));
 		context.sendOrderedBroadcast(buttonUp, "android.permission.CALL_PRIVILEGED");
 	}	
-	private void hangUpWithAirPlanceMode(Context context) {
+	private void hangUpWithAirPlaneMode(Context context) {
 		if(D)Log.d(TAG, "hangUpWithAirPlanceMode()");
 
 		// Enable Airplane Mode
@@ -118,7 +118,7 @@ public class Service extends android.app.Service {
 					boolean autohangup = mHelper.loadBooleanPref(context, "autohangup", mHelper.AUTOHANGUP);
 					if(autohangup&&state==TelephonyManager.CALL_STATE_OFFHOOK) {
 						if(D)Log.d(TAG, "AutoHangup");
-						hangUpWithAirPlanceMode(context);
+						hangUpWithAirPlaneMode(context);
 						return;
 					}	
 				}
