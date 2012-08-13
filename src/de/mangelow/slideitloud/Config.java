@@ -32,7 +32,7 @@ import android.view.Window;
 public class Config extends PreferenceActivity {
 
 	private final static String TAG = "SIL";
-	private final static boolean D = true;
+	private final static boolean D = false;
 
 	private Context context;
 	private Helper mHelper = new Helper();

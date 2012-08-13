@@ -21,7 +21,7 @@ import android.util.Log;
 public class Receiver extends BroadcastReceiver {
 
 	private final String TAG = "SIL";
-	private final boolean D = true;
+	private final boolean D = false;
 
 	private Helper mHelper = new Helper();
 	

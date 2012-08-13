@@ -29,7 +29,7 @@ import android.view.KeyEvent;
 public class Service extends android.app.Service {
 
 	private final String TAG = "SIL";
-	private final boolean D = true;
+	private final boolean D = false;
 
 	private final String BCAST_CONFIGCHANGED = "android.intent.action.CONFIGURATION_CHANGED";
 	String stateString = "";
@@ -57,12 +57,6 @@ public class Service extends android.app.Service {
 	private void answerCallWithHeadsethook(Context context) {
 		if(D)Log.d(TAG, "answerCallWithHeadsethook()");
 
-		// Simulate a press of the headset button to pick up the call
-		//Intent buttonDown = new Intent(Intent.ACTION_MEDIA_BUTTON);             
-		//buttonDown.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_HEADSETHOOK));
-		//context.sendOrderedBroadcast(buttonDown, "android.permission.CALL_PRIVILEGED");
-
-		// froyo and beyond trigger on buttonUp instead of buttonDown
 		Intent buttonUp = new Intent(Intent.ACTION_MEDIA_BUTTON);               
 		buttonUp.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_HEADSETHOOK));
 		context.sendOrderedBroadcast(buttonUp, "android.permission.CALL_PRIVILEGED");
@@ -104,8 +98,8 @@ public class Service extends android.app.Service {
 
 				TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 				int state = tm.getCallState();
-				//if(D)Log.d(TAG, "getCallState: "+state);	
-				if(state<=0)return;
+				if(D)Log.d(TAG, "getCallState: "+state);	
+				if(state<TelephonyManager.CALL_STATE_RINGING)return;
 
 				Configuration configuration = getResources().getConfiguration();
 				String config_string = configuration.toString();				
@@ -122,7 +116,7 @@ public class Service extends android.app.Service {
 					if(D)Log.d(TAG, "Loud speaker off");
 					
 					boolean autohangup = mHelper.loadBooleanPref(context, "autohangup", mHelper.AUTOHANGUP);
-					if(autohangup) {
+					if(autohangup&&state==TelephonyManager.CALL_STATE_OFFHOOK) {
 						if(D)Log.d(TAG, "AutoHangup");
 						hangUpWithAirPlanceMode(context);
 						return;
@@ -133,7 +127,7 @@ public class Service extends android.app.Service {
 					if(D)Log.d(TAG, "Loud speaker on");
 
 					boolean autoanswer = mHelper.loadBooleanPref(context, "autoanswer", mHelper.AUTOANSWER);
-					if(state==1&&autoanswer) {
+					if(autoanswer&&state==TelephonyManager.CALL_STATE_RINGING) {
 						if(D)Log.d(TAG, "AutoAnswer");
 						answerCallWithHeadsethook(context);
 					}
