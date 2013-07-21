@@ -104,7 +104,7 @@ public class Service extends android.app.Service {
 				Configuration configuration = getResources().getConfiguration();
 				String config_string = configuration.toString();				
 				boolean closed = false;
-				if(config_string.contains("keys=2/1/2"))closed=true;
+				if(config_string.contains("keys=2/1/2")||config_string.contains("qwerty/v/h"))closed=true;
 				if(D)Log.d(TAG, "closed: "+closed);
 
 				AudioManager audioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
